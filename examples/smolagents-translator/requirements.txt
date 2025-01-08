@@ -1,0 +1,16 @@
+# Core dependencies
+torch>=2.0.0
+transformers>=4.36.0
+smolagents>=0.0.6
+
+# Translation specific
+sacremoses>=0.0.53
+sentencepiece>=0.1.99
+
+# Optional but recommended for better performance
+accelerate>=0.27.0
+protobuf>=4.25.0  # Cho model serialization
+
+langchain
+chromadb
+sentence-transformers

@@ -1,0 +1,13 @@
+langchain>=0.1.4
+langchain-community>=0.0.20
+langchain-ollama>=0.0.1
+beautifulsoup4>=4.12.3
+ollama>=0.1.0
+fastapi>=0.104.1
+uvicorn>=0.24.0
+pydantic>=2.5.2
+transformers>=4.35.2
+google-api-python-client>=2.0.0
+python-dotenv>=1.0.0
+faiss-cpu>=1.7.4
+langchain_google_community>=0.0.1
