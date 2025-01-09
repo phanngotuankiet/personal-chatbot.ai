@@ -1,5 +1,7 @@
 # hàm xử lý tóm tắt nội dung từ website thông qua url
 from fastapi import HTTPException
+from langchain.chains.combine_documents.base import BaseCombineDocumentsChain
+from langchain_core.documents.base import Document
 from langchain_ollama import ChatOllama, OllamaLLM
 from types_api.types_api import SummarizeRequest, SummarizeResponse
 from langchain_community.document_loaders import WebBaseLoader
@@ -8,7 +10,7 @@ from langchain.chains.summarize import load_summarize_chain
 async def web_summary(req: SummarizeRequest) -> SummarizeResponse:
     try:
         loader = WebBaseLoader(req.url)
-        docs = loader.load()
+        docs: list[Document] = loader.load()
         
         if not docs:
             raise HTTPException(status_code=404, detail="No content found")
@@ -17,7 +19,7 @@ async def web_summary(req: SummarizeRequest) -> SummarizeResponse:
         # llm = OllamaLLM(model=req.model or "llama2-uncensored")
         llm = ChatOllama(model=req.model or "llama2-uncensored")
         # chain từ langchain để summarize
-        chain = load_summarize_chain(
+        chain: BaseCombineDocumentsChain = load_summarize_chain(
             llm=llm, 
             chain_type=req.chain_type or "stuff", 
             verbose=True
