@@ -5,7 +5,9 @@ import uvicorn
 
 # import smolagents services
 from smolagents_examples.services.run_task_smolagents import run_task_smolagents
-from types_api.types_api import RunTaskRequest
+from smolagents_examples.services.run_task_translate import run_task_translate
+from types_api.types_api import RunTaskRequest, SummarizeResponse, TranslateRequest, SummarizeRequest
+from langchain_examples.services.web_summary import web_summary
 
 # environment
 import os
@@ -34,11 +36,30 @@ async def handle_run_task_smolagents(req: RunTaskRequest):
     Returns:
         {result: str}: Result of the task
     """
-    # curl:
     #  curl -X POST "http://localhost:8000/api/run-task-smolagents" \
     #      -H "Content-Type: application/json" \
     #      -d '{"task": "What is the 1st number in the Fibonacci sequence?"}'
     return await run_task_smolagents(req)
+
+@app.post("/api/run-task-translate")
+async def handle_run_task_translate(req: TranslateRequest):
+    """
+    Run task with translate agent
+    """
+    #  curl -X POST "http://localhost:8000/api/run-task-translate" \
+    #      -H "Content-Type: application/json" \
+    #      -d '{"text": "Hello, how are you?", "source_lang": "en", "target_lang": "vi"}'
+    return await run_task_translate(req)
+
+@app.post("/api/web-summary")
+async def handle_web_summary(req: SummarizeRequest) -> SummarizeResponse:
+    """
+    Give url of a website, return summary of the website content
+    """
+    # curl -X POST "http://localhost:8000/api/web-summary" \
+    #      -H "Content-Type: application/json" \
+    #      -d '{"url": "https://www.google.com", "model": "llama2-uncensored"}'
+    return await web_summary(req)
 
 @app.get("/health")
 def health_check():

@@ -16,7 +16,6 @@ langchain_google_community>=0.0.1
 # Core ML libraries
 torch
 transformers>=4.36.0
-accelerate>=0.27.0
 huggingface-hub>=0.20.0
 
 # Agent và tools
@@ -28,10 +27,6 @@ python-dotenv>=0.19.0
 requests>=2.31.0
 numpy>=1.24.0
 
-# Optional but recommended
-sentencepiece  # Cho tokenization
-protobuf  # Cho model serialization
-
 # Web API
 fastapi>=0.109.0
 uvicorn>=0.27.0
@@ -41,3 +36,18 @@ pydantic>=2.0.0 # Data validation như TypeScript
 # CORS
 starlette>=0.36.0
 cors>=1.0.1
+
+# Translation specific
+sacremoses>=0.0.53
+sentencepiece>=0.1.99 # Cho tokenization
+
+# Optional but recommended for better performance
+accelerate>=0.27.0
+protobuf>=4.25.0  # Cho model serialization
+
+# Chroma db
+chromadb
+
+sentence-transformers
+
+beautifulsoup4>=4.12.3

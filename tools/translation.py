@@ -24,7 +24,7 @@ class TranslationTool(Tool):
         super().__init__()
         model_name = "Helsinki-NLP/opus-mt-en-vi"
         self.tokenizer = MarianTokenizer.from_pretrained(model_name)
-        self.model = MarianMTModel.from_pretrained(model_name)
+        self.model: MarianMTModel = MarianMTModel.from_pretrained(model_name)
 
     def forward(self, text: str, source_lang: str, target_lang: str) -> str:
         try:
@@ -44,6 +44,6 @@ class TranslationTool(Tool):
             return result
 
         except Exception as e:
-            error_msg = f"Translation failed: {str(e)}"
+            error_msg: str = f"Translation failed: {str(e)}"
             print(error_msg) 
             raise Exception(error_msg)

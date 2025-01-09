@@ -1,7 +1,7 @@
 from smolagents import CodeAgent, HfApiModel
 
 # Load tool tự define vào
-from translation_tool import TranslationTool
+from tools.translation import TranslationTool
 
 # Tải các biến từ environment variables
 import os
