@@ -47,7 +47,21 @@ protobuf>=4.25.0  # Cho model serialization
 
 # Chroma db
 chromadb
+langchain-chroma>=0.1.2
 
 sentence-transformers
 
 beautifulsoup4>=4.12.3
+
+duckduckgo-search>=4.1.0
+google-search-results>=2.4.2
+
+# async crawler
+aiohttp>=3.9.1
+
+langchain-huggingface
+sentence_transformers
+
+langchain-core
+langchain-community
+rich
