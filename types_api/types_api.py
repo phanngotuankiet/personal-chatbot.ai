@@ -1,5 +1,5 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, Field, HttpUrl
+from typing import Optional, List, Dict, Literal
 
 # Regular run task with empty tool array
 class RunTaskRequest(BaseModel):
@@ -38,4 +38,48 @@ class SummarizeResponse(BaseModel):
     success: bool
     summary: str
     metadata: SummarizeRequest
+
+class NewsRequest(BaseModel):
+    query: str
+    max_results: int = 5
+    time_period: str = "day"
+
+class NewsResponse(BaseModel):
+    success: bool
+    articles: List[Dict]
+    summary: str
+    key_insights: List[str]
+
+class NewsParams(BaseModel):
+    q: str # Query
+    location: Optional[str] = None # Location Requested
+    device: Optional[Literal["desktop", "mobile", "tablet"]] = "desktop"
+    hl: Optional[str] = None # Google UI Language
+    gl: Optional[str] = None # Google Country
+    safe: Optional[Literal["active", "off"]] = "off" # Safe Search Flag
+    num: Optional[int] = 10 # Number of Results
+    start: Optional[int] = 0 # Pagination Offset
+    api_key: str
+    tbm: Optional[Literal["nws", "isch", "shop"]] = "nws" # To be match
+    tbs: Optional[str] = None # custom to be search criteria
+    async_: Optional[Literal["true", "false"]] = Field(default="false", alias="async")# allow async request
+    output: Optional[Literal["json", "html"]] = "json" # output format
+    
+class WebContentResponse(BaseModel):
+    title: str
+    content: str
+    metadata: Optional[Dict] = None
+
+class ScrapeRequest(BaseModel):
+    url: HttpUrl
+    crawl_entire_site: bool = False
+    max_pages: int = 10
+
+class ProcessWebContentsResponse(BaseModel):
+    title: str
+    filter_prompt: str
+    filtered_content: str
+    num_chunks: int
+    url: str
+    persist_dir: str
 

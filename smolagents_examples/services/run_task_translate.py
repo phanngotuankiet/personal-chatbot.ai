@@ -1,4 +1,4 @@
-from tools.translation import TranslationTool
+from tools.translation_tool import TranslationTool
 from multiprocessing import freeze_support
 from types_api.types_api import TranslateRequest
 
